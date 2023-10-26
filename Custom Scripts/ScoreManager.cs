@@ -13,7 +13,6 @@ public class ScoreManager : MonoBehaviour
     public GameObject score; // Parent object for the score
     public GameObject caret; // Caret object to signify where notes are placed
     public GameObject notePrefab; // Note prefab
-    public TMPro.TextMeshProUGUI timerText; // Text to display the loop status
 
     /* Private variables */
     private float elapsedTime = 0f; // Elapsed time since the start of the song
@@ -82,6 +81,9 @@ public class ScoreManager : MonoBehaviour
 
         // Reset the loop time
         loopTime = Mathf.Infinity;
+
+        // Reset first note drawn
+        firstNoteDrawn = false;
     }
 
     public void SetLoopTime() {
