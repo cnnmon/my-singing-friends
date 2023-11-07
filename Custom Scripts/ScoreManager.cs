@@ -13,6 +13,8 @@ public class ScoreManager : MonoBehaviour
     public GameObject score; // Parent object for the score
     public GameObject caret; // Caret object to signify where notes are placed
     public GameObject notePrefab; // Note prefab
+    public Button loopButton; // Loop button
+    public Animator composerWave; // Wave animation for the composer
 
     /* Private variables */
     private float elapsedTime = 0f; // Elapsed time since the start of the song
@@ -53,7 +55,7 @@ public class ScoreManager : MonoBehaviour
         if (!firstNoteDrawn) {
             firstNoteDrawn = true;
         }
-
+        
         // Instantiate a new note
         Vector2 pos = new Vector2(caret.transform.localPosition.x - 0.6f, 0);
         GameObject note = Instantiate(notePrefab, caret.transform.localPosition, Quaternion.identity);
@@ -84,9 +86,19 @@ public class ScoreManager : MonoBehaviour
 
         // Reset first note drawn
         firstNoteDrawn = false;
+        elapsedTime = 0f;
+
+        // Set score back to initial position
+        score.transform.localPosition = scoreInitialPos;
+
+        // Set the loop button to enabled
+        loopButton.interactable = true;
     }
 
     public void SetLoopTime() {
         this.loopTime = elapsedTime;
+
+        // Set the loop button to disabled
+        loopButton.interactable = false;
     }
 }
